@@ -6,10 +6,6 @@ def add_stock(df):
         ticker = input("What stock do you want to add? \n")
         shares = int(input("How many shares do you want to buy? \n"))
 
-        if ticker in 
-
-
-
 def view_portfolio(df):
     print("Portfolio Stats")
 
