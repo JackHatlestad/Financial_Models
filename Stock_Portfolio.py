@@ -5,9 +5,18 @@ def add_stock(df):
     while True:
         ticker = input("What stock do you want to add? \n")
         shares = int(input("How many shares do you want to buy? \n"))
+        if ticker in df['Ticker Symbol'].values: 
+            print('LOL')
+        else: 
+            ticker_symbol = yf.Ticker(ticker)
+            current_price = ticker_symbol.fast_info['last_price']
+            new_row = {"Ticker Symbol": ticker, "Current Balance": (current_price * shares), "Shares": shares, 'Current Price': current_price, 'Expense Ratio': 0}
+            df = df._append(new_row, ignore_index=True)
+            break
+    return df 
 
 def view_portfolio(df):
-    print("Portfolio Stats")
+    print(df)
 
 def advanced_stats(df1):
     print("Advanced_Stats")
@@ -25,12 +34,10 @@ def main():
         df1 = pd.DataFrame(columns=["% Stocks", '% Bonds', '% Others', '% Domestic Stocks', '% International Stocks',
                                     'Investment Costs'])
         
-
-    
     while True: 
         menu = int(input("1. Add Stock\n 2. View Portfolio \n 3. Advanced Portfolio Statistics \n 4. Exit \n"))
         if menu == 1:
-            add_stock(df)
+            df = add_stock(df)
     
         elif menu == 2:
             view_portfolio(df)
