@@ -12,7 +12,8 @@ def add_stock(df):
             current_price = ticker_symbol.fast_info['last_price']
             new_row = {"Ticker Symbol": ticker, "Current Balance": (current_price * shares), "Shares": shares, 'Current Price': current_price, 'Expense Ratio': 0}
             df = df._append(new_row, ignore_index=True)
-            break
+            
+            
     return df 
 
 def view_portfolio(df):
