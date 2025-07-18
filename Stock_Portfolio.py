@@ -6,12 +6,19 @@ def add_stock(df):
         ticker = input("What stock do you want to add? \n")
         shares = int(input("How many shares do you want to buy? \n"))
         if ticker in df['Ticker Symbol'].values: 
-            print('LOL')
+            print("LOL")
+            choice = int(input("Do you want to add another stock?\n 1. Yes \n 2. No"))
+            if choice == 2:
+                break
+
         else: 
             ticker_symbol = yf.Ticker(ticker)
             current_price = ticker_symbol.fast_info['last_price']
             new_row = {"Ticker Symbol": ticker, "Current Balance": (current_price * shares), "Shares": shares, 'Current Price': current_price, 'Expense Ratio': 0}
             df = df._append(new_row, ignore_index=True)
+            choice = int(input("Do you want to add another stock?\n 1. Yes \n 2. No"))
+            if choice == 2:
+                break
             
             
     return df 
